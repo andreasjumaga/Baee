@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(255, 182, 193, 0.3), rgba(255, 192, 203, 0.3)), url('IMG_20250615_143024.jpg') center/cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Floating Hearts Animation */
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .heart:nth-child(7) { left: 70%; animation-delay: 0.5s; }
+        .heart:nth-child(8) { left: 80%; animation-delay: 1.5s; }
+        .heart:nth-child(9) { left: 90%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 0.7; }
+            50% { transform: translateY(-10vh) rotate(180deg); opacity: 1; }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #d63384;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '♥';
+            display: block;
+            font-size: 2rem;
+            color: #ff69b4;
+            margin-top: 10px;
+        }
+
+        /* Scattered Photo Layout - Desktop */
+        .photo-scattered {
+            position: absolute;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 5;
+        }
+
+        .photo-scattered:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .photo-scattered img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-scattered:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px 15px 15px;
+            font-style: italic;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-scattered:hover .photo-caption {
+            opacity: 1;
+        }
+
+        /* Photo positioning within each section - Desktop */
+        .intro-section {
+            min-height: 80vh;
+        }
+
+        .intro-section .photo-1 {
+            width: 280px;
+            height: 350px;
+            top: 20%;
+            right: 10%;
+            transform: rotate(8deg);
+        }
+
+        .intro-section .photo-2 {
+            width: 250px;
+            height: 300px;
+            bottom: 10%;
+            left: 5%;
+            transform: rotate(-5deg);
+        }
+
+        .quotes-section .photo-3 {
+            width: 300px;
+            height: 380px;
+            top: -50px;
+            right: 15%;
+            transform: rotate(12deg);
+        }
+
+        .quotes-section .photo-4 {
+            width: 260px;
+            height: 320px;
+            bottom: -80px;
+            left: 8%;
+            transform: rotate(-8deg);
+        }
+
+        .biblical-section .photo-5 {
+            width: 290px;
+            height: 360px;
+            top: -60px;
+            right: 12%;
+            transform: rotate(6deg);
+        }
+
+        .biblical-section .photo-6 {
+            width: 270px;
+            height: 340px;
+            bottom: -70px;
+            left: 10%;
+            transform: rotate(-10deg);
+        }
+
+        .timeline-section .photo-7 {
+            width: 310px;
+            height: 390px;
+            top: -80px;
+            right: 8%;
+            transform: rotate(15deg);
+        }
+
+        .timeline-section .photo-8 {
+            width: 280px;
+            height: 350px;
+            bottom: -90px;
+            left: 12%;
+            transform: rotate(-7deg);
+        }
+
+        .final-section {
+            min-height: 60vh;
+        }
+
+        .final-section .photo-9 {
+            width: 300px;
+            height: 380px;
+            top: 20%;
+            right: 10%;
+            transform: rotate(9deg);
+        }
+
+        /* Love Quotes */
+        .quotes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .quote-card {
+            background: linear-gradient(135deg, #fff 0%, #ffeef8 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #ff69b4;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .quote-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: #ff69b4;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+
+        .quote-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .quote-author {
+            text-align: right;
+            color: #d63384;
+            font-weight: bold;
+        }
+
+        /* Biblical Quotes */
+        .biblical-quotes {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+        }
+
+        .biblical-quote-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #6f42c1;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .biblical-quote-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .biblical-quote-card::before {
+            content: '✝';
+            font-size: 2rem;
+            color: #6f42c1;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            opacity: 0.3;
+        }
+
+        .biblical-text {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .biblical-reference {
+            text-align: right;
+            color: #6f42c1;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* Memory Lane */
+        .memory-lane {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #ff69b4;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 50px 0;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '♥';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #ff69b4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        .timeline-date {
+            color: #ff69b4;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #d63384 0%, #ff69b4 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0) rotate(360deg);
+            }
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 60px !important;
+                padding-right: 0 !important;
+            }
+            
+            .timeline-item::before {
+                left: 10px !important;
+            }
+
+            .quotes-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .quote-card, .biblical-quote-card {
+                padding: 25px;
+            }
+
+            /* Mobile Photo Positioning - Smaller and Scattered */
+            .photo-scattered {
+                position: absolute !important;
+                border-radius: 15px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                z-index: 3;
+            }
+
+            /* Mobile specific photo sizes and positions */
+            .intro-section .photo-1 {
+                width: 120px !important;
+                height: 150px !important;
+                top: 15% !important;
+                right: 5% !important;
+                transform: rotate(12deg) !important;
+            }
+
+            .intro-section .photo-2 {
+                width: 110px !important;
+                height: 140px !important;
+                bottom: 20% !important;
+                left: 8% !important;
+                transform: rotate(-8deg) !important;
+            }
+
+            .quotes-section .photo-3 {
+                width: 130px !important;
+                height: 160px !important;
+                top: 10px !important;
+                right: 10% !important;
+                transform: rotate(15deg) !important;
+            }
+
+            .quotes-section .photo-4 {
+                width: 115px !important;
+                height: 145px !important;
+                bottom: 50px !important;
+                left: 5% !important;
+                transform: rotate(-12deg) !important;
+            }
+
+            .biblical-section .photo-5 {
+                width: 125px !important;
+                height: 155px !important;
+                top: 20px !important;
+                right: 8% !important;
+                transform: rotate(10deg) !important;
+            }
+
+            .biblical-section .photo-6 {
+                width: 120px !important;
+                height: 150px !important;
+                bottom: 60px !important;
+                left: 10% !important;
+                transform: rotate(-15deg) !important;
+            }
+
+            .timeline-section .photo-7 {
+                width: 135px !important;
+                height: 165px !important;
+                top: 30px !important;
+                right: 6% !important;
+                transform: rotate(18deg) !important;
+            }
+
+            .timeline-section .photo-8 {
+                width: 125px !important;
+                height: 155px !important;
+                bottom: 40px !important;
+                left: 7% !important;
+                transform: rotate(-10deg) !important;
+            }
+
+            .final-section .photo-9 {
+                width: 140px !important;
+                height: 170px !important;
+                top: 25% !important;
+                right: 8% !important;
+                transform: rotate(8deg) !important;
+            }
+
+            /* Mobile photo captions - smaller text */
+            .photo-caption {
+                padding: 10px 8px 8px !important;
+                font-size: 0.7rem !important;
+            }
+
+            /* Ensure content is readable with smaller photos */
+            .container {
+                padding: 0 15px;
+            }
+
+            /* Add some margin to quote cards so they don't get hidden behind photos */
+            .quote-card, .biblical-quote-card {
+                margin: 15px 0;
+                position: relative;
+                z-index: 4;
+            }
+
+            /* Adjust timeline for mobile */
+            .timeline-content {
+                padding: 20px;
+                margin: 10px 0;
+            }
+
+            /* Mobile hover effects - use tap instead */
+            .photo-scattered:active {
+                transform: scale(1.1) rotate(0deg) !important;
+            }
+
+            .photo-scattered:active .photo-caption {
+                opacity: 1;
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            /* Even smaller photos for very small screens */
+            .photo-scattered {
+                width: 100px !important;
+                height: 125px !important;
+            }
+
+            .intro-section .photo-1 {
+                width: 100px !important;
+                height: 125px !important;
+            }
+
+            .intro-section .photo-2 {
+                width: 95px !important;
+                height: 120px !important;
+            }
+
+            .quotes-section .photo-3 {
+                width: 105px !important;
+                height: 130px !important;
+            }
+
+            .quotes-section .photo-4 {
+                width: 100px !important;
+                height: 125px !important;
+            }
+
+            .biblical-section .photo-5 {
+                width: 110px !important;
+                height: 135px !important;
+            }
+
+            .biblical-section .photo-6 {
+                width: 105px !important;
+                height: 130px !important;
+            }
+
+            .timeline-section .photo-7 {
+                width: 115px !important;
+                height: 140px !important;
+            }
+
+            .timeline-section .photo-8 {
+                width: 110px !important;
+                height: 135px !important;
+            }
+
+            .final-section .photo-9 {
+                width: 120px !important;
+                height: 145px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="hearts">
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>To My Beautiful Love</h1>
+            <p>Every moment with you is a treasure, every day a blessing</p>
+            <p style="font-size: 1rem; color: #999;">Scroll down to discover our beautiful journey together ♥</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section with Photos -->
+    <section class="section intro-section">
+        <div class="container">
+            <h2 class="section-title">Our Beautiful Story Begins</h2>
+            <div style="text-align: center; font-size: 1.3rem; color: #666; max-width: 600px; margin: 0 auto;">
+                Every love story is beautiful, but ours is my favorite. Here are the moments that make my heart skip a beat...
+            </div>
+        </div>
+        
+        <!-- Photos scattered in this section -->
+        <div class="photo-scattered photo-1">
+            <img src="IMG-20250710-WA0090.jpg" alt="Your beautiful smile">
+            <div class="photo-caption">Your radiant smile lights up my world ♥</div>
+        </div>
+
+        <div class="photo-scattered photo-2">
+            <img src="IMG-20250715-WA0006.jpg" alt="At work">
+            <div class="photo-caption">Even at work, you're absolutely stunning</div>
+        </div>
+    </section>
+
+    <!-- Love Quotes Section with Photos -->
+    <section class="section quotes-section">
+        <div class="container">
+            <h2 class="section-title">Words of Love</h2>
+            <div class="quotes-container">
+                <div class="quote-card">
+                    <div class="quote-text">You are my today and all of my tomorrows.</div>
+                    <div class="quote-author">— Leo Christopher</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine.</div>
+                    <div class="quote-author">— Maya Angelou</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">I love you not only for what you are, but for what I am when I am with you.</div>
+                    <div class="quote-author">— Roy Croft</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">You are my sun, my moon, and all of my stars.</div>
+                    <div class="quote-author">— E.E. Cummings</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.</div>
+                    <div class="quote-author">— Lao Tzu</div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote-text">The best love is the kind that awakens the soul and makes us reach for more, that plants a fire in our hearts and brings peace to our minds.</div>
+                    <div class="quote-author">— Nicholas Sparks</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photos scattered in this section -->
+        <div class="photo-scattered photo-3">
+            <img src="IMG-20250710-WA0023.jpg" alt="Natural beauty">
+            <div class="photo-caption">Your natural beauty takes my breath away</div>
+        </div>
+
+        <div class="photo-scattered photo-4">
+            <img src="IMG-20250710-WA0180.jpg" alt="Happy moment">
+            <div class="photo-caption">Your happiness is my greatest joy</div>
+        </div>
+    </section>
+
+    <!-- Biblical Love Quotes Section with Photos -->
+    <section class="section biblical-quotes biblical-section">
+        <div class="container">
+            <h2 class="section-title">Love According to Scripture</h2>
+            <div class="quotes-container">
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs.</div>
+                    <div class="biblical-reference">1 Corinthians 13:4-5</div>
+                </div>
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">Above all, love each other deeply, because love covers over a multitude of sins.</div>
+                    <div class="biblical-reference">1 Peter 4:8</div>
+                </div>
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">And now these three remain: faith, hope and love. But the greatest of these is love.</div>
+                    <div class="biblical-reference">1 Corinthians 13:13</div>
+                </div>
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">Place me like a seal over your heart, like a seal on your arm; for love is as strong as death, its jealousy unyielding as the grave.</div>
+                    <div class="biblical-reference">Song of Solomon 8:6</div>
+                </div>
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">Many waters cannot quench love; rivers cannot sweep it away.</div>
+                    <div class="biblical-reference">Song of Solomon 8:7</div>
+                </div>
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up.</div>
+                    <div class="biblical-reference">Ecclesiastes 4:9-10</div>
+                </div>
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">I have found the one whom my soul loves.</div>
+                    <div class="biblical-reference">Song of Solomon 3:4</div>
+                </div>
+                <div class="biblical-quote-card">
+                    <div class="biblical-text">He has taken me to the banquet hall, and his banner over me is love.</div>
+                    <div class="biblical-reference">Song of Solomon 2:4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photos scattered in this section -->
+        <div class="photo-scattered photo-5">
+            <img src="Screenshot_2025-05-15-12-50-27-261_com.discord.jpg" alt="Video call">
+            <div class="photo-caption">Even through a screen, you make my heart skip</div>
+        </div>
+
+        <div class="photo-scattered photo-6">
+            <img src="IMG-20250531-WA0349.jpg" alt="Together">
+            <div class="photo-caption">Perfect moments with my perfect person</div>
+        </div>
+    </section>
+
+    <!-- Memory Lane Timeline with Photos -->
+    <section class="section memory-lane timeline-section">
+        <div class="container">
+            <h2 class="section-title">Our Love Story Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">The Day We Met</div>
+                        <div class="timeline-text">From the moment I saw you, I knew my life would never be the same. Your smile lit up the entire room and my heart found its home.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Our First Conversations</div>
+                        <div class="timeline-text">Hours felt like minutes when we talked. Every word you spoke drew me deeper into your beautiful soul.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">First "I Love You"</div>
+                        <div class="timeline-text">Three little words that changed everything. The moment I knew that what we had was real, deep, and forever.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Our Adventures Together</div>
+                        <div class="timeline-text">From aquarium visits to matching outfits, every moment with you becomes a treasured memory. You make ordinary days extraordinary.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Building Our Future</div>
+                        <div class="timeline-text">Every day I fall in love with you all over again. You are my present happiness and my future dreams all wrapped into one beautiful person.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photos scattered in this section -->
+        <div class="photo-scattered photo-7">
+            <img src="IMG_20250525_163350.jpg" alt="Mirror selfie">
+            <div class="photo-caption">Building memories together, one moment at a time</div>
+        </div>
+
+        <div class="photo-scattered photo-8">
+            <img src="IMG_20250704_193814.jpg" alt="Matching outfits">
+            <div class="photo-caption">Two hearts, one smile - perfectly matched</div>
+        </div>
+    </section>
+
+    <!-- Final Section with Last Photo -->
+    <section class="section final-section">
+        <div class="container">
+            <div style="text-align: center; font-size: 1.5rem; color: #666; max-width: 700px; margin: 0 auto;">
+                Like the jellyfish floating gracefully in the ocean, you move through my life with such beauty and grace. Every moment with you feels like magic.
+            </div>
+        </div>
+
+        <!-- Final photo -->
+        <div class="photo-scattered photo-9">
+            <img src="IMG-20250531-WA0076.jpg" alt="Aquarium silhouette">
+            <div class="photo-caption">Like the jellyfish, you move gracefully through my heart</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <h2>Forever and Always</h2>
+            <p>You are my greatest blessing, my deepest love, and my brightest future.</p>
+            <p style="margin-top: 20px; font-size: 1rem;">♥ Made with endless love just for you ♥</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll animations for photos and sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and photos
+        document.querySelectorAll('.section, .photo-scattered').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Add floating hearts on click
+        document.addEventListener('click', function(e) {
+            createFloatingHeart(e.clientX, e.clientY);
+        });
+
+        function createFloatingHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '♥';
+            heart.style.position = 'fixed';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            heart.style.color = '#ff69b4';
+            heart.style.fontSize = '20px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.animation = 'floatUp 2s ease-out forwards';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+
+        // Add sparkle effect on photo hover (desktop) or tap (mobile)
+        document.querySelectorAll('.photo-scattered').forEach(item => {
+            // Desktop hover
+            item.addEventListener('mouseenter', function() {
+                if (window.innerWidth > 768) {
+                    createSparkles(this);
+                }
+            });
+            
+            // Mobile tap
+            item.addEventListener('touchstart', function() {
+                if (window.innerWidth <= 768) {
+                    createSparkles(this);
+                }
+            });
+        });
+
+        function createSparkles(element) {
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.position = 'absolute';
+                    sparkle.style.left = Math.random() * element.offsetWidth + 'px';
+                    sparkle.style.top = Math.random() * element.offsetHeight + 'px';
+                    sparkle.style.fontSize = '10px';
+                    sparkle.style.pointerEvents = 'none';
+                    sparkle.style.animation = 'sparkle 1s ease-out forwards';
+                    sparkle.style.zIndex = '5';
+                    
+                    element.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
